@@ -5,7 +5,7 @@ from typing import Literal, Annotated
 import pickle
 import pandas as pd
 from model.predict import predict_output,model
-from schema import prediction_response
+from schema.prediction_response import PredictionResponse
 from schema.user_input import UserInput
 #import model
 
@@ -23,7 +23,7 @@ def home():
 def health_check():
     return {"status": "ok",
             "model_loaded": True if model else False,} 
-@app.post("/predict",response_model=prediction_response)
+@app.post("/predict",response_model=PredictionResponse)
 def predict_premium(data: UserInput):
     input_data = {
         "bmi": data.bmi,
